@@ -6,7 +6,7 @@
     "homepage": "http://threedubmedia.com/code/event/",
     "repository": {
         "type": "git",
-        "url": "git@github.com:dextermilo/jquery.threedubmedia.git"
+        "url": "git@github.com:mindmatters/jquery.threedubmedia.git"
     },
     "dependencies": {
         "jquery": "1.7.2"
