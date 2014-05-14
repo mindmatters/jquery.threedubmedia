@@ -8,19 +8,19 @@
 $.fn.fire = function( type, opts ){
 	opts = opts || {};
 	// translate pageX to clientX
-	if ( opts.pageX && !opts.clientX )	
+	if ( opts.pageX && !opts.clientX )
 		opts.clientX = opts.pageX - $( window ).scrollLeft();
 	// translate pageY to clientY
-	if ( opts.pageY && !opts.clientY )	
+	if ( opts.pageY && !opts.clientY )
 		opts.clientY = opts.pageY - $( window ).scrollTop();
-	// iterate the jquery collection	
+	// iterate the jquery collection
 	return this.each(function(){
 		// clone options uniquely for each instance
 		opts = $.extend( {}, $.fire.defaults, opts );
 		// instanitate a new event
 		new $.fire( this, type, opts );
 	});
-};		   
+};
 
 // Constructor
 $.fire = function( element, type, opts ){
@@ -30,19 +30,19 @@ $.fire = function( element, type, opts ){
 	this.dispatch();
 };
 
-// Defaults 
+// Defaults
 $.fire.defaults = {
-	bubbles: true, 
-	cancelable: true, 
-	view: window, 
+	bubbles: true,
+	cancelable: true,
+	view: window,
 	detail: 0,
-	screenX: 0, 
-	screenY: 0, 
-	clientX: 0, 
+	screenX: 0,
+	screenY: 0,
+	clientX: 0,
 	clientY: 0,
-	ctrlKey: false, 
-	altKey: false, 
-	shiftKey: false, 
+	ctrlKey: false,
+	altKey: false,
+	shiftKey: false,
 	metaKey: false,
 	button: 0
 };
@@ -76,53 +76,53 @@ $.fire.prototype = {
 		if ( document.createEvent ){
 			event = document.createEvent("HTMLEvents");
 			event.initEvent(
-				this.type, 
-				opts.bubbles, 
+				this.type,
+				opts.bubbles,
 				opts.cancelable
 			);
-			$.extend( event, { 
+			$.extend( event, {
 				view: opts.view,
 				detail: opts.detail,
-				screenX: opts.screenX, 
-				screenY: opts.screenY, 
-				clientX: opts.clientX, 
+				screenX: opts.screenX,
+				screenY: opts.screenY,
+				clientX: opts.clientX,
 				clientY: opts.clientY,
-				ctrlKey: opts.ctrlKey, 
-				altKey: opts.altKey, 
-				shiftKey: opts.shiftKey, 
+				ctrlKey: opts.ctrlKey,
+				altKey: opts.altKey,
+				shiftKey: opts.shiftKey,
 				metaKey: opts.metaKey,
-				keyCode: opts.keyCode, 
+				keyCode: opts.keyCode,
 				charCode: opts.charCode,
 				button: opts.button
 			});
-		} 
+		}
 		else if ( document.createEventObject ) {
 			event = $.extend( document.createEventObject(), opts );
 		}
-		return event;			
+		return event;
 	},
 	mouse: function( opts ){
 		var event;
 		if ( document.createEvent ){
 			event = document.createEvent("MouseEvents");
 			event.initMouseEvent(
-				this.type, 
-				opts.bubbles, 
-				opts.cancelable, 
-				opts.view, 
+				this.type,
+				opts.bubbles,
+				opts.cancelable,
+				opts.view,
 				opts.detail,
-				opts.screenX, 
-				opts.screenY, 
-				opts.clientX, 
+				opts.screenX,
+				opts.screenY,
+				opts.clientX,
 				opts.clientY,
-				opts.ctrlKey, 
-				opts.altKey, 
-				opts.shiftKey, 
+				opts.ctrlKey,
+				opts.altKey,
+				opts.shiftKey,
 				opts.metaKey,
-				opts.button, 
-				$( opts.relatedTarget )[0] || document.body.parentNode 
+				opts.button,
+				$( opts.relatedTarget )[0] || document.body.parentNode
 			);
-		} 
+		}
 		else if ( document.createEventObject ) {
 			event = this.event();
 			event.button = { 0:1, 1:4, 2:2 }[ event.button ] || event.button;
@@ -135,22 +135,22 @@ $.fire.prototype = {
 			try {
 				event = document.createEvent("KeyEvents");
 				event.initKeyEvent(
-					this.type, 
-					opts.bubbles, 
-					opts.cancelable, 
+					this.type,
+					opts.bubbles,
+					opts.cancelable,
 					opts.view,
-					opts.ctrlKey, 
-					opts.altKey, 
-					opts.shiftKey, 
+					opts.ctrlKey,
+					opts.altKey,
+					opts.shiftKey,
 					opts.metaKey,
-					opts.keyCode, 
+					opts.keyCode,
 					opts.charCode
 				);
-			} 
+			}
 			catch ( err ){
 				event = this.event( opts );
 			}
-		} 
+		}
 		else if ( document.createEventObject ){
 			event = this.event( opts );
 		}

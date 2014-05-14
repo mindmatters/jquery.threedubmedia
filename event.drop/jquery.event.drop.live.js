@@ -1,4 +1,4 @@
-/*! 
+/*!
  * jquery.event.drop.live - v 2.2
  * Copyright (c) 2010 Three Dub Media - http://threedubmedia.com
  * Open Source MIT License - http://threedubmedia.com/code/license
@@ -25,7 +25,7 @@ drop.noBubble = false;
 drop.livekey = "livedrop";
 
 // new drop event add method
-drop.add = function( obj ){ 
+drop.add = function( obj ){
 	// call the old method
 	origadd.apply( this, arguments );
 	// read the data
@@ -38,7 +38,7 @@ drop.add = function( obj ){
 };
 
 // new drop event teardown method
-drop.teardown = function(){ 
+drop.teardown = function(){
 	// call the old method
 	origteardown.apply( this, arguments );
 	// read the data
@@ -54,7 +54,7 @@ drop.teardown = function(){
 // identify potential delegate elements
 drop.delegate = function( event, dd ){
 	// local refs
-	var elems = [], $targets, 
+	var elems = [], $targets,
 	// element event structure
 	events = $.data( this, "events" ) || {};
 	// query live events
@@ -66,7 +66,7 @@ drop.delegate = function( event, dd ){
 			// locate the elements to delegate
 			$targets = $( event.currentTarget ).find( obj.selector );
 			// no element found
-			if ( !$targets.length ) 
+			if ( !$targets.length )
 				return;
 			// take each target...
 			$targets.each(function(){
@@ -74,8 +74,8 @@ drop.delegate = function( event, dd ){
 				$event.add( this, obj.origType +'.'+ drop.livekey, obj.origHandler || obj.handler, obj.data );
 				// remember new elements
 				if ( $.inArray( this, elems ) < 0 )
-					elems.push( this );	
-			});	
+					elems.push( this );
+			});
 		});
 	});
 	// may not exist when artifically triggering dropinit event
@@ -83,11 +83,11 @@ drop.delegate = function( event, dd ){
 		// clean-up after the interaction ends
 		$event.add( dd.drag, "dragend."+drop.livekey, function(){
 			$.each( elems.concat( this ), function(){
-				$event.remove( this, '.'+ drop.livekey );							
+				$event.remove( this, '.'+ drop.livekey );
 			});
 		});
 	//drop.delegates.push( elems );
 	return elems.length ? $( elems ) : false;
 };
 
-})( jQuery ); // confine scope	
+})( jQuery ); // confine scope
