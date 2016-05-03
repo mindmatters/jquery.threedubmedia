@@ -6,8 +6,5 @@
   "author": {
     "name": "erotte"
   },
-  "license": "MIT",
-  "dependencies": {
-    "jquery": "1.7.2"
-  }
+  "license": "MIT"
 }
